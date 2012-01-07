@@ -1,5 +1,7 @@
 $("document").ready(function bc() {
 	var load_tweet_intarval = 15 * 1000; // tweet のポーリング間隔(msec)
+	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
+	var side_width = 360; // 2カラムCSSの全体コンテナサイズのうち、main以外の部分
 
 	// 放送タイトル表示
 	$("title").text(broadcast_title);
@@ -11,6 +13,11 @@ $("document").ready(function bc() {
 	// Streaming URL 表示
 	$("#broadcast_url").text(broadcast_url);
 	
+	// 配信エリアサイズ設定
+	$("#player_wrapper").width(broadcast_width);
+	$("#player_wrapper").height(broadcast_height + player_crtl_height);
+	$("#container").width(broadcast_width + side_width)
+	
 	// IE以外にプラグイン誘導表示
 	if (!$.browser.msie) {
 		$("#plugin_invitation").text("Windows Media Player プラグイン(IE以外用)のダウンロード");
@@ -21,8 +28,8 @@ $("document").ready(function bc() {
 	var object_html = "<object";
 	object_html +=  " id='player_object'";
 	object_html +=  " type='application/x-oleobject'";
-	object_html +=  " width='640'";
-	object_html +=  " height='545'";
+	object_html +=  " width='" + broadcast_width + "'";
+	object_html +=  " height='" + (broadcast_height + player_crtl_height) + "'";
 	object_html +=  " classid='CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6'";
 	object_html +=  " standby='Loading Windows Media Player components...'";
 	object_html += ">";
@@ -38,8 +45,8 @@ $("document").ready(function bc() {
 	object_html +=  " type='application/x-mplayer2'";
 	object_html +=  " name='MediaPlayer'";
 	object_html +=  " src='" + broadcast_url +"'";
-	object_html +=  " width='640'" ;
-	object_html +=  " height='545'" ;
+	object_html +=  " width='" + broadcast_width + "'" ;
+	object_html +=  " height='" + (broadcast_height + player_crtl_height) + "'" ;
 	object_html +=  " showControls='1'";
 	object_html +=  " showStatusBar='0'";
 	object_html +=  " showDisplay='0'";
