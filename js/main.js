@@ -1,5 +1,6 @@
 $("document").ready(function bc() {
 	var load_tweet_intarval = 15 * 1000; // tweet のポーリング間隔(msec)
+	var load_description_interval = 10 * 1000; // 配信説明テキストのポーリング間隔(msec)
 	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
 	var side_width = 360; // 2カラムCSSの全体コンテナサイズのうち、main以外の部分
 
@@ -8,9 +9,8 @@ $("document").ready(function bc() {
 	$("#broadcast_title").text(broadcast_title);
 
 	// 放送説明表示・ポーリング
-	$.get("config/description.txt", function (description) {
-		$("#description").text(description);
-	});
+	load_description();
+	setInterval("load_description()", load_description_interval);
 	
 	// Streaming URL 表示
 	$("#broadcast_url").text(broadcast_url);
