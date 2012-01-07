@@ -1,4 +1,4 @@
-$("document").ready(function bc() {
+$("document").ready(function() {
 	var load_tweet_intarval = 15 * 1000; // tweet のポーリング間隔(msec)
 	var load_description_interval = 10 * 1000; // 配信説明テキストのポーリング間隔(msec)
 	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
