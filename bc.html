@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='ja' lang='ja'>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<meta http-equiv="content-script-type" content="text/javascript" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./css/2cols_side-width-fixed.css" />
+	<link rel="stylesheet" type="text/css" href="./css/main.css" />
+	<link rel="stylesheet" type="text/css" href="./css/twitter.css" />
+	<script type="text/javascript" src="./config/config.js"></script>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/utils.js"></script>
+	<script type="text/javascript" src="./js/twitter.js"></script>
+	<script type="text/javascript" src="./js/bc.js"></script>
+</head>	
+<body>
+<div id="container">
+
+<div id="main_wrapper">
+<div id="main">
+
+<h1 id="broadcast_title"></h1> 
+
+<div id="player_wrapper" style="width:640px;height:545px;clear:both;z-index:10;position:relative">
+	<p style="position:absolute;z-index:0">
+		<a id="plugin_invitation" style="font-weight:bold" href="http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download" target="_blank"></a>
+	</p>
+	<span id="player"></span>
+</div>
+
+<div id="twitter_post_area">
+	<textarea id="twitter_msg" cols="60" rows="3"></textarea> 
+	<input id="in_reply_to_status_id" type="hidden"></input>
+	<button id="twitter_post">ツイート</button><br />
+	<span id="twitter_rest_tweet_length"></span>
+</div>
+<pre id="description"></pre>
+<div id="debug"></div>
+</div>
+</div>
+<div id="side" class="tools tools_right">
+
+<h2>
+<a id="hashtag_url" target="_blank">Tweet at <span id="tweet_result_desc"></span></a>
+</h2>
+
+<div id='twitter_stream'>
+	<div id='twitter_results'></div>
+</div>
+
+<div id='broadcast_url_area'>
+外部プレイヤー・鏡用URL<br />
+<span id="broadcast_url"></span>
+</div>
+
+</div>
+
+<div id="footer">
+<p>
+<span style="font-weight:bold">IE以外のブラウザ（Firefox/Chrome/Opera/Safari）で再生できない場合は、<br />
+<a style="font-weight:bold" href="http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download" target="_blank">こちらのプラグイン</a>をインストールし、ブラウザを再起動すれば見られるはずです。</span><br />エラーが出た場合、一度アンインストールして再インストールで見られるケースもあるようです。
+</p>
+<p>
+再生ボタンを押しても始まらない場合は、放送休止中です。
+</p>
+<p>
+プライベートモードの方のツイートは、右のツイートリストに表示されない仕様です<br />
+（twitter の Search API で取得できないため）。
+</p>
+<p>
+<a href="http://nanashi.coresv.com/tools/WME_browser_broadcasting_tool_ver.0.01.zip" target="_blank">WMEブラウザ配信ツール Ver.0.01</a>.02<br />
+制作:nanashi(<a href="http://www.twitter.com/tako774/" target="_blank">@tako774</a>)
+</p>
+</div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,25 @@
+@charset "utf-8";
+body {
+  text-align: center;
+  margin: 0;
+}
+#container {
+  width: 1000px;
+  margin-left: 12px;
+  margin-right: auto;
+  text-align: left;
+}
+#main_wrapper {
+  width: 100%;
+  margin-right: -350px;
+  float: left;
+}
+#main { margin-right: 350px; }
+#side {
+  width: 344px;
+  float: left;
+}
+#footer {
+  width: 100%;
+  clear: left;
+}

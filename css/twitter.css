@@ -1,0 +1,75 @@
+#twitter_stream {
+	border:1px solid #999999;
+	height:626px;
+	overflow-y:auto;
+}
+
+#twitter_msg {
+	margin-top:4px;
+	margin-right:5px;
+	float:left;
+}
+
+#twitter_post {
+	vertical-align:top;
+	margin-top:4px;
+	margin-bottom:4px;
+	height:2em;
+}
+
+#twitter_results {
+	border:1px solid #999999;
+	padding:5px;
+}
+
+.tweet_result {
+	font-size:0.9em;
+	color:#333333;
+}
+
+#twitter_results p {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+#twitter_results hr {
+	border-width: 1px 0px 0px 0px;
+	border-color: #999999;
+	margin: 1px 0px 1px 0px;
+	height: 1px;
+}
+
+.tweet_user {
+	margin-right:5px;
+}
+
+#twitter_results scrollbar {
+	background-color: -moz-Dialog !important;
+	background-image: url("chrome://global/skin/reintoolbar/back-light-b.png") !important;
+}
+#twitter_results scrollbar[orient="vertical"] {
+	width: 5px !important;
+}
+#twitter_results scrollbar[orient="horizontal"] {
+	height: 10px !important;
+}
+#twitter_results select > scrollbar[orient="vertical"] {
+	background-color: -moz-Field !important;
+	background-image: none !important;
+	width: 14px !important;
+}
+#twitter_results thumb {
+	background-color: #888888 !important;
+	background-image: none !important;
+	border: none !important;
+	border-radius: 4px;
+}
+#twitter_results select > scrollbar thumb {
+	width: 14px;
+	border: solid -moz-Field !important;
+	border-width: 0px 0px 0px 9px !important;
+	border-radius: 0px;
+}
+#twitter_results scrollbarbutton {
+	display: none;
+}
