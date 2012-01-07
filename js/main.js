@@ -7,7 +7,7 @@ $("document").ready(function bc() {
 	$("title").text(broadcast_title);
 	$("#broadcast_title").text(broadcast_title);
 
-	// 放送説明表示
+	// 放送説明表示・ポーリング
 	$.get("config/description.txt", function (description) {
 		$("#description").text(description);
 	});
