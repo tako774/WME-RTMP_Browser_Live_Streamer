@@ -4,5 +4,3 @@ var broadcast_width  = 640 // movie width
 var broadcast_height = 480 // movie height
 var broadcast_title = ""; // 放送タイトル 例："〇〇放送局"
 var hashtag = ""; // 配信用の twitter ハッシュタグ 他の人とかぶらなければ何でもいいと思います
-
-var description = ""; // 配信説明文章 改行は\n

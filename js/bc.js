@@ -8,7 +8,9 @@ $("document").ready(function bc() {
 	$("#broadcast_title").text(broadcast_title);
 
 	// 放送説明表示
-	$("#description").text(description);
+	$.get("config/description.txt", function (description) {
+		$("#description").text(description);
+	});
 	
 	// Streaming URL 表示
 	$("#broadcast_url").text(broadcast_url);
