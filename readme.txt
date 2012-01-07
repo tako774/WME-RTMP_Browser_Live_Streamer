@@ -10,9 +10,10 @@ WME での配信を前提にしています
 twitter と連携できます
 
 ○使い方
-１．config/config.js の設定を自分用にかきます
-２．どこかのサーバーにアップロードします
-３．bc.html のアドレスを公開します（bc.html の名前はかえても動きます）
+1.config/config_model.js をコピーして config/config.js を作り、
+  config/config.js の設定を自分用に書き換えます
+2.どこかのサーバーにアップロードします
+3.bc.html のアドレスを公開します（bc.html の名前はかえても動きます）
 
 ○捕捉
 Q1.twitter の特定のハッシュタグを、棒読みちゃんで読ませたいです
