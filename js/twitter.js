@@ -73,7 +73,7 @@ function load_tweets(hashtag) {
 			result += 	"<a href='http://twitter.com/" + this.from_user + "' class='tweet_user' target='_blank'>";
 			result += 	"@" + this.from_user;
 			result += 	"</a>";
-			result += 	"<a href='" + status_url + "' target='_blank' class='tweet_date' id='tweet_" + this.id_str + "_date' title='" + created_date + "'>" + created_at_str + "</span>";
+			result += 	"<a href='" + status_url + "' target='_blank' class='tweet_date' id='tweet_" + this.id_str + "_date' title='" + created_date + "'>" + created_at_str + "</a>";
 			result += 	" <a id='" + reply_id + "' title='@" + this.from_user + "'>返信</a>";
 			result += 	" <a href='https://twitter.com/intent/retweet?tweet_id=" + this.id_str +"' target='_blank'>RT</a>";
 			result += 	" <a href='https://twitter.com/intent/favorite?tweet_id=" + this.id_str +"' target='_blank'>fav</a>";
