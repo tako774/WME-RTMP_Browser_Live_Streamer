@@ -1,13 +1,16 @@
 // 特定ハッシュタグのデータを取得する
 function load_tweets(hashtag) {
-	var last_ID = $(".tweet_result:first").attr("ID");
+	var last_id = $(".tweet_result:first").attr("id");
+	var last_created_date = null;
 	var hashtag_regexp = new RegExp("\\W#" + hashtag +"(\\W|$)", "g");
 	var max_display_tweet_nums = 1000;
+	var TWEET_SPLIT_DIRATION_SEC = 8 * 60 * 60 // この秒数以上離れたツイート間の線は強調する
 	var now = new Date();
 	
-	if (last_ID) {
-		last_ID = last_ID.replace("tweet_", "");
-		var url = "http://search.twitter.com/search.json?q=%23" + hashtag + "&since_id=" + last_ID + "&result_type=recent&include_entities=true&callback=?";
+	if (last_id) {
+		last_id = last_id.replace("tweet_", "");
+		last_created_date = new Date($("#tweet_" + last_id + "_date").attr("title"));
+		var url = "http://search.twitter.com/search.json?q=%23" + hashtag + "&since_id=" + last_id + "&result_type=recent&include_entities=true&callback=?";
 	} else {
 		var url = "http://search.twitter.com/search.json?q=%23" + hashtag + "&rpp=100&result_type=recent&include_entities=true&callback=?"; 
 	}
@@ -15,16 +18,26 @@ function load_tweets(hashtag) {
 	$.getJSON(url, function(json) { 
 		var results = '';
 		var reply_ids = new Array();
-		$(json.results).each(function() {
-			if (this.id_str == undefined || this.id_str == last_ID) return;
+		
+		// 古い方のツイートから処理するようソートしてからHTML化
+		$(json.results).sort(function(a, b) {
+			var a_date = new Date(a.created_at);
+			var b_date = new Date(b.created_at);
+			if (a_date == b_date) return  0;
+			if (a_date > b_date)  return  1;
+			if (a_date < b_date)  return  -1;
+		}).each(function() {
+			if (this.id_str == undefined || this.id_str == last_id) return;
 			var created_date = new Date(this.created_at);
 			var created_at_str = ""
 			var reply_id = "reply_" + this.id_str;
+			var status_url = "http://twitter.com/" + this.from_user + "/status/" + this.id_str;
 			var urls = new Array();
-			if (this.entities) {
-				urls = this.entities.urls;
-			}
 			var text = this.text;
+			var result = "";
+			
+			if (this.entities) urls = this.entities.urls;
+			if (!last_created_date) last_created_date = created_date;
 			
 			//// 表示内容を修正
 			// 短縮URLを展開
@@ -47,21 +60,33 @@ function load_tweets(hashtag) {
 			}
 			
 			// ツイートHTMLを生成
-			results += "<p class='tweet_result' id='tweet_" + this.id_str + "'>";
-			results += 	"<a href='http://twitter.com/" + this.from_user + "' class='tweet_user'>";
-			results += 		"<img width='24' height='24' alt='" + this.from_user + " on Twitter' src='" + this.profile_image_url + "' />";
-			results += 	"</a>";
-			results += 	text;
-			results += 	" - ";
-			results += 	"<a href='http://twitter.com/" + this.from_user + "' class='tweet_user' target='_blank'>";
-			results += 	"@" + this.from_user;
-			results += 	"</a>";
-			results += 	created_at_str;
-			results += 	" <a id='" + reply_id + "' title='@" + this.from_user + "'>返信</a>";
-			results += 	" <a href='https://twitter.com/intent/retweet?tweet_id=" + this.id_str +"' target='_blank'>RT</a>";
-			results += 	" <a href='https://twitter.com/intent/favorite?tweet_id=" + this.id_str +"' target='_blank'>fav</a>";
-			results += "</p>";
-			results += "<hr />";
+			if (now - created_date >= TWEET_SPLIT_DIRATION_SEC * 1000) {
+				result += "<p class='tweet_result tweet_old' id='tweet_" + this.id_str + "'>";
+			} else {
+				result += "<p class='tweet_result' id='tweet_" + this.id_str + "'>";
+			}
+			result += 	"<a href='http://twitter.com/" + this.from_user + "' class='tweet_user'>";
+			result += 		"<img width='24' height='24' alt='" + this.from_user + " on Twitter' src='" + this.profile_image_url + "' />";
+			result += 	"</a>";
+			result += 	text;
+			result += 	" - ";
+			result += 	"<a href='http://twitter.com/" + this.from_user + "' class='tweet_user' target='_blank'>";
+			result += 	"@" + this.from_user;
+			result += 	"</a>";
+			result += 	"<a href='" + status_url + "' target='_blank' class='tweet_date' id='tweet_" + this.id_str + "_date' title='" + created_date + "'>" + created_at_str + "</span>";
+			result += 	" <a id='" + reply_id + "' title='@" + this.from_user + "'>返信</a>";
+			result += 	" <a href='https://twitter.com/intent/retweet?tweet_id=" + this.id_str +"' target='_blank'>RT</a>";
+			result += 	" <a href='https://twitter.com/intent/favorite?tweet_id=" + this.id_str +"' target='_blank'>fav</a>";
+			result += "</p>";
+			if (created_date - last_created_date >= TWEET_SPLIT_DIRATION_SEC * 1000) {
+				result += "<hr /><hr />";
+			} else {
+				result += "<hr />";
+			}
+			
+			last_created_date = created_date;
+			
+			results = result + results;
 		});
 		$("#twitter_results").prepend(results);
 		

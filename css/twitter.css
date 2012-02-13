@@ -27,6 +27,11 @@
 	color:#333333;
 }
 
+.tweet_old {
+	color: #999999;
+	background-color: #F4F4F4;
+}
+
 #twitter_results p {
   margin-top:0;
   margin-bottom:0;
