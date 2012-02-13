@@ -33,21 +33,23 @@ function getTimeStr(date) {
 	return hour + ':' + min + ':' + sec;
 }
 
+// デバッグメッセージ表示
 function debug(msg) {
 	p = document.createElement("p");
 	p.innerHTML = getTimeStr(new Date()) + " " + msg
 	$("#debug").prepend(p);
 }
 
-function xmlUnescape(s) {
-	s = s.replace(/&amp;/g, "&");
-	s = s.replace(/&gt;/g , ">");
-	s = s.replace(/&lt;/g , "<");
-	s = s.replace(/&apos;/g, "\'");
-	s = s.replace(/&quot;/, "\"");
-	return s;
-}
-
-function urlDecode2f(s) {
-	return s.replace(/%2f/gi, "/");
+// HTMLエスケープ
+function html_escape(str) {
+	var map = {
+		"<":"&lt;",
+		">":"&gt;",
+		"&":"&amp;",
+		"'":"&#39;",
+		"\"":"&quot;",
+		" ":"&nbsp;"
+	};
+	var replaceStr = function(s) { return map[s]; };
+	return str.replace(/<|>|&|'|"|\s/g, replaceStr);
 }
