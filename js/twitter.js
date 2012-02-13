@@ -3,6 +3,7 @@ function load_tweets(hashtag) {
 	var last_ID = $(".tweet_result:first").attr("ID");
 	var hashtag_regexp = new RegExp("\\W#" + hashtag +"(\\W|$)", "g");
 	var max_display_tweet_nums = 1000;
+	var now = new Date();
 	
 	if (last_ID) {
 		last_ID = last_ID.replace("tweet_", "");
@@ -39,7 +40,7 @@ function load_tweets(hashtag) {
 			reply_ids.push(reply_id);
 			
 			// 日付文字列生成
-			if (isSameDate(created_date, new Date())) {
+			if (isSameDate(created_date, now)) {
 				created_at_str = getTimeStr(created_date);
 			} else {
 				created_at_str = getDateTimeStr(created_date);
