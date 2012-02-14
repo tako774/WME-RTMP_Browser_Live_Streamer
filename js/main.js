@@ -3,6 +3,24 @@ $("document").ready(function() {
 	var load_description_interval = 15 * 1000; // 配信説明テキストのポーリング間隔(msec)
 	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
 	var side_width = 360; // 2カラムCSSの全体コンテナサイズのうち、main以外の部分
+	var current_version = version; // 使用中のバージョン
+	
+	// 最新バージョン記述ファイルURL
+	var latest_version_url = "http://tako774.net/tools/WME_Browser_Live_Streamer_latest_version.js";
+	
+	// 使用中バージョン表示
+	$("#current_version").text(current_version);
+		
+	// 最新バージョン取得
+	// 使用中のものより新しいバージョンが最新であれば、文字を表示
+	$.getScript(latest_version_url, function() {
+		var latest_version = version;
+		if (latest_version > current_version) {
+			$("#latest_version").text(" Ver." + latest_version);
+		} else if (latest_version  == current_version) {
+			$("#is_latest").text("(最新)");
+		}
+	});
 	
 	// 設定にもとづいた画面描画を実施
 	function display_all() {
