@@ -24,7 +24,7 @@ $("document").ready(function() {
 		
 		// IE以外にプラグイン誘導表示
 		if (!$.browser.msie) {
-			$("#plugin_invitation").text("Windows Media Player プラグイン(IE以外用)のダウンロード");
+			$("#plugin_invitation").html("Windows Media Player プラグイン(IE以外用)のダウンロード<br />インストールして、ブラウザを再起動すれば見られるはずです");
 		}
 		
 		// player の HTML 文字列生成
