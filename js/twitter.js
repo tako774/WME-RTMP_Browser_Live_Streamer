@@ -2,18 +2,11 @@
 function load_tweets(hashtag) {
 	var last_id = $(".tweet_result:first").attr("id");
 	var last_created_date = null;
-	var hashtag_regexp = new RegExp("\\W#" + hashtag +"$");
+	var hashtag_regexp = new RegExp("\\W#" + hashtag +"(\\W|$)", "g");
 	var max_display_tweet_nums = 1000;
 	var TWEET_SPLIT_DIRATION_SEC = 8 * 60 * 60 // この秒数以上離れたツイート間の線は強調する
-	var HTTP_URL_REGEXP_STR = "https?:\\/\\/[-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\$,%#]+"; // HTTP[S]のURL正規表現文字列
 	var now = new Date();
 	
-	// 配信元URL、ツイートに含まれる配信URLの生成
-	var parent_url = document.location.href.replace(/^[^?]+\?/, '');
-	var bc_url_regexp = new RegExp(" " + "((?:" + HTTP_URL_REGEXP_STR + ")?" + parent_url + ")");
-	
-	// ツイート検索URL生成
-	// 取得済みのツイートがあれば、それ以降のもののみ取得する
 	if (last_id) {
 		last_id = last_id.replace("tweet_", "");
 		last_created_date = new Date($("#tweet_" + last_id + "_date").attr("title"));
@@ -42,24 +35,18 @@ function load_tweets(hashtag) {
 			var urls = new Array();
 			var text = this.text;
 			var result = "";
-			var mirror_url = "";
 			
 			if (this.entities) urls = this.entities.urls;
 			if (!last_created_date) last_created_date = created_date;
 			
-			//// ツイート表示内容を修正
-			// 本文の短縮URLを展開
+			//// 表示内容を修正
+			// 短縮URLを展開
 			$(urls).each(function() {
 				text = text.replace(this.url, this.expanded_url);
 			});
-			// 本文から放送ハッシュタグを削除
-			text = text.replace(hashtag_regexp, '')
-			// 本文から配信親の放送URLを削除
-			text = text.replace(" " + parent_url, '')
-			// 本文から鏡の放送URLを削除、存在したら記録
-			text = text.replace(bc_url_regexp, '')
-			mirror_url = RegExp.$1;
-			// 本文のハイパーリンク化
+			// 放送ハッシュタグと放送URLを削除
+			text = text.replace(hashtag_regexp, '').replace(" " + document.location.href, '')
+			// ハイパーリンク化
 			text = linkify(text);
 			
 			// リプライ一覧を取得
@@ -90,9 +77,6 @@ function load_tweets(hashtag) {
 			result += 	" <a id='" + reply_id + "' title='@" + this.from_user + "'>返信</a>";
 			result += 	" <a href='https://twitter.com/intent/retweet?tweet_id=" + this.id_str +"' target='_blank'>RT</a>";
 			result += 	" <a href='https://twitter.com/intent/favorite?tweet_id=" + this.id_str +"' target='_blank'>fav</a>";
-			if (mirror_url != '') {
-				result += 	" <a href='" + mirror_url +"' target='_blank'>鏡</a>";
-			}
 			result += "</p>";
 			if (created_date - last_created_date >= TWEET_SPLIT_DIRATION_SEC * 1000) {
 				result += "<hr /><hr />";
