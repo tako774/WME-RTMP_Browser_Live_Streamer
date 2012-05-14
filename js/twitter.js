@@ -10,9 +10,9 @@ function load_tweets(hashtag) {
 	if (last_id) {
 		last_id = last_id.replace("tweet_", "");
 		last_created_date = new Date($("#tweet_" + last_id + "_date").attr("title"));
-		var url = "http://search.twitter.com/search.json?q=%23" + hashtag + "&since_id=" + last_id + "&result_type=recent&include_entities=true&callback=?";
+		var url = "http://search.twitter.com/search.json?q=%23" + encodeURI(hashtag) + "&since_id=" + last_id + "&result_type=recent" + "&include_entities=true" + "&callback=?";
 	} else {
-		var url = "http://search.twitter.com/search.json?q=%23" + hashtag + "&rpp=100&result_type=recent&include_entities=true&callback=?"; 
+		var url = "http://search.twitter.com/search.json?q=%23" + encodeURI(hashtag) + "&rpp=100" + "&result_type=recent" + "&include_entities=true" + "&callback=?"; 
 	}
 	
 	$.getJSON(url, function(json) { 
@@ -119,7 +119,7 @@ function post_tweet(msg, hashtag) {
 		var tweet_post_window = "tweet_" + hashtag;
 		var tweet_post_url = "https://twitter.com/intent/tweet?";
 		var in_reply_to_status_id = $("#in_reply_to_status_id").val();
-		tweet_post_url += "hashtags=" + hashtag + "%2C";
+		tweet_post_url += "hashtags=" + encodeURIComponent(hashtag);
 		tweet_post_url += "&original_referer=" + encodeURIComponent(document.location.href);
 		tweet_post_url += "&source=tweetbutton";
 		tweet_post_url += "&url=" + encodeURIComponent(document.location.href);
