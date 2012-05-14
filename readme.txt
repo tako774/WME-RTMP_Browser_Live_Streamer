@@ -1,8 +1,8 @@
 NAME: WME Browser Live Streamer (WMEブラウザ配信ツール)
 Author: nanashi (@tako774)
 Lisence: NYSL (同梱のNYSL.txtを参照)
-Version: 0.04
-Date: 2012/02/15
+Version: 0.05
+Date: 2012/05/15
 
 ○概要
 - javascript しか使っていない、ブラウザで使えるライブストリーミング配信ツールです
@@ -17,6 +17,9 @@ Date: 2012/02/15
 　にブラウザでアクセスしてみると、どういうことかわかると思います。
 
 ○使い方（通常配信時）
+
+0.HTMLがアップロードできるサーバーを確保します（無料サーバーでも構いません）
+
 1.config/config_model.js をコピーして config/config.js を作り、
   config/config.js の設定を自分用に書き換えます
   (Ver.0.01 -> Ver.0.02 では一部互換性がありませんので、再設定をお願いします）
@@ -29,7 +32,9 @@ Date: 2012/02/15
 4.index.html のアドレスを公開します（index.html の名前はかえても動きます）
  (Ver.0.02以前では、bc.html という名前でした。index.html に変更することを推奨します）
 
-5.配信内容の説明文は、配信中に config/descripiton.txt を書き換えることで自動反映されます
+5.WME/MEE/KTE + 鏡ツール等で配信を開始し、どこかで上記4のURLを告知します
+
+6.配信内容の説明文は、配信中に config/descripiton.txt を書き換えることで自動反映されます
   説明文が更新されても特に通知はでませんので、視聴者にアピールしたい場合は、
   ツイートするなり、しゃべるなりでフォローが必要になります
 
