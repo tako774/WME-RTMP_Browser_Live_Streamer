@@ -10,7 +10,7 @@ function load_tweets(hashtag) {
 	
 	// 配信元URL、ツイートに含まれる配信URLの生成
 	var parent_url = document.location.href.replace(/^[^?]+\?/, '');
-	var bc_url_regexp = new RegExp(" " + "((?:" + HTTP_URL_REGEXP_STR + ")?" + parent_url + ")");
+	var bc_url_regexp = new RegExp(" " + "(" + HTTP_URL_REGEXP_STR + "?\\?" + parent_url + ")");
 	
 	// ツイート検索URL生成
 	// 取得済みのツイートがあれば、それ以降のもののみ取得する
@@ -54,11 +54,11 @@ function load_tweets(hashtag) {
 			});
 			// 本文から放送ハッシュタグを削除
 			text = text.replace(hashtag_regexp, '')
-			// 本文から配信親の放送URLを削除
-			text = text.replace(" " + parent_url, '')
 			// 本文から鏡の放送URLを削除、存在したら記録
 			text = text.replace(bc_url_regexp, '')
 			mirror_url = RegExp.$1;
+			// 本文から配信親の放送URLを削除
+			text = text.replace(" " + parent_url, '')
 			// 本文のハイパーリンク化
 			text = linkify(text);
 			
@@ -90,7 +90,10 @@ function load_tweets(hashtag) {
 			result += 	" <a id='" + reply_id + "' title='@" + this.from_user + "'>返信</a>";
 			result += 	" <a href='https://twitter.com/intent/retweet?tweet_id=" + this.id_str +"' target='_blank'>RT</a>";
 			result += 	" <a href='https://twitter.com/intent/favorite?tweet_id=" + this.id_str +"' target='_blank'>fav</a>";
-			if (mirror_url != '') {
+			if (mirror_url == '' && document.location.href != parent_url) {
+				result += 	" <a href='" + parent_url +"' target='_blank'>親</a>";
+			}
+			if (mirror_url != '' && mirror_url != document.location.href) {
 				result += 	" <a href='" + mirror_url +"' target='_blank'>鏡</a>";
 			}
 			result += "</p>";
