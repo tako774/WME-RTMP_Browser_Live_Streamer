@@ -1,8 +1,8 @@
 NAME: WME Browser Live Streamer (WMEブラウザ配信ツール)
 Author: nanashi (@tako774)
 Lisence: NYSL (同梱のNYSL.txtを参照)
-Version: 0.05
-Date: 2012/05/15
+Version: 0.06
+Date: 2012/05/22
 
 ○概要
 - javascript しか使っていない、ブラウザで使えるライブストリーミング配信ツールです
@@ -50,5 +50,5 @@ Date: 2012/05/15
 ○補足
 Q1.twitter の特定のハッシュタグを、棒読みちゃんで読ませたいです
 A1.Search Streaming を読ませる設定が、最新の棒読みちゃんでできます
-  Ver.0.11.0 だとできなくて、最新のVer.0.11.0β5でできることを確認しています。
+  Ver.0.11.0 だとできなくて、最新のVer.0.11.0β6でできることを確認しています。
   設定方法はKIAI
