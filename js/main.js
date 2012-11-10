@@ -245,6 +245,7 @@ $("document").ready(function() {
         $("#twitter_authorize").hide();
         // 検索結果のリロード開始
         $("#twitter_results").show();
+        $("#twitter_reauthorize").show();
         load_tweets_hashtag();
         load_tweet_interval = setInterval(load_tweets_hashtag, load_tweet_intarval);
       }
@@ -262,6 +263,7 @@ $("document").ready(function() {
   if (tw.isAuthorized()) {
     // Twitter 認証済みであれば、ツイート検索結果を表示
     $("#twitter_results").show();
+    $("#twitter_reauthorize").show();
     load_tweets_hashtag();
     load_tweet_interval = setInterval(load_tweets_hashtag, load_tweet_intarval_time);
   } else {
@@ -274,6 +276,7 @@ $("document").ready(function() {
     function() {
       // 検索結果のリロード停止
       clearInterval(load_tweet_interval);
+      $("#twitter_reauthorize").hide();
       showTwitterAuthorize();
     }
   );
