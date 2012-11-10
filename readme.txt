@@ -1,20 +1,23 @@
 NAME: WME Browser Live Streamer (WMEブラウザ配信ツール)
 Author: nanashi (@tako774)
 Lisence: NYSL (同梱のNYSL.txtを参照)
-Version: 0.06
-Date: 2012/05/22
+Version: 0.10
+Date: 2012/10/10
 
 ○概要
 - javascript しか使っていない、ブラウザで使えるライブストリーミング配信ツールです
 - WME/MEE/KTE など、Windows Media Player で視聴できるエンコーダーであれば、なんでも使えます
-- twitter と連携できます
-- 配信内容説明テキスト(config/description.txt の内容)は、
-  視聴者のリロード無しで更新されます(Ver.0.02より)
+- twitter と連携できます（Twitter API 1.1 対応済み）
+- 配信内容説明テキスト(config/description.txt の内容)は、視聴者のリロード無しで更新されます
 - 鏡モード
 　他のWMEブラウザ配信ツールの配信を鏡する際に、検索ハッシュタグなどを相手の設定にする機能
 　自分の配信URLの後ろに"?<配信元のWMEブラウザ配信ツールのURL>"をつけるだけで使えます
 　	http://<自分の配信ツールのURL>?http://tako774.net/bc/
 　にブラウザでアクセスしてみると、どういうことかわかると思います。
+
+○判明済みの不具合
+- Opera でツイート・RT・fav をすると、twitter から json ファイルがダウンロードされてしまう
+　→ ファイルを開くか聞かれたりしますが、開かなければ問題はないです。
 
 ○使い方（通常配信時）
 
