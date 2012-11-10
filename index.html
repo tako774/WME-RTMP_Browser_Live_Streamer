@@ -11,10 +11,15 @@
 	<link rel="stylesheet" type="text/css" href="./css/twitter.css" />
 	<script type="text/javascript" src="./config/config.js"></script>
 	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="./js/jquery.textchange.js"></script>
 	<script type="text/javascript" src="./js/utils.js"></script>
 	<script type="text/javascript" src="./js/twitter.js"></script>
 	<script type="text/javascript" src="./js/bc.js"></script>
 	<script type="text/javascript" src="./js/version.js"></script>
+	<script type="text/javascript" src="./js/sha1.js"></script>
+	<script type="text/javascript" src="./js/oauth.js"></script>
+	<script type="text/javascript" src="./js/twitter_api.js"></script>
 	<script type="text/javascript" src="./js/main.js"></script>
 </head>	
 <body>
@@ -35,6 +40,7 @@
 <div id="twitter_post_area">
 	<textarea id="twitter_msg" cols="60" rows="3"></textarea> 
 	<input id="in_reply_to_status_id" type="hidden"></input>
+	<input id="reply_to_user" type="hidden"></input>
 	<button id="twitter_post">ツイート</button><br />
 	<span id="twitter_rest_tweet_length"></span>
 </div>
@@ -45,12 +51,24 @@
 </div>
 <div id="side" class="tools tools_right">
 
-<h2>
-<a id="hashtag_url" target="_blank">Tweet at <span id="tweet_result_desc"></span></a>
-</h2>
+<div id="twitter_link">
+<img alt="Twitter" src="./image/twitter-bird-blue-on-white_24x24.png"><a id="hashtag_url" target="_blank"><span id="tweet_result_desc"></span></a>
+</div>
+<div id="twitter_tool">
+  <a id="twitter_reauthorize">再認証</a>
+</div>
 
 <div id='twitter_stream'>
-	<div id='twitter_results'></div>
+	<div id='twitter_results' style="display:none"></div>
+  <ol id="twitter_authorize" style="display:none">
+    <li id="open_request_token_window_text">Twitter の <button id="open_request_token_window">Request Token 画面を開く</button></li>
+    <li id="request_token_response_text">1の表示をすべてコピペ <input id="request_token_response" type="text"  disabled="disabled" /></li>
+    <li id="open_authorize_window_text">Twitter の <button id="open_authorize_window" disabled="disabled">認証画面を開く</button></li>
+    <li id="pin_text">3で表示された数字を手動で入力 <input id="pin" type="number" size="7" maxlength="7" disabled="disabled" /></li>
+    <li id="open_access_token_window_text">Twitter の <button id="open_access_token_window" disabled="disabled">Access Token 画面を開く</button></li>
+    <li id="access_token_response_text">5の表示をすべてコピペ <input id="access_token_response" type="text" disabled="disabled" /></li>
+    <li id="set_access_token_response_text"><button id="set_access_token_response" disabled="disabled">Twitter 連携完了！</button> を押す</li>
+  </ol>
 </div>
 
 <div id='broadcast_url_area'>

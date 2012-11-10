@@ -17,6 +17,20 @@
 	height:2em;
 }
 
+#twitter_link {
+	float:left;
+	margin-bottom:4px !important;
+}
+
+#twitter_tool {
+	float:right;
+	margin-bottom:4px !important;
+}
+
+#twitter_stream {
+	clear: both;
+}
+
 #twitter_results {
 	border:1px solid #999999;
 	padding:5px;
@@ -44,8 +58,47 @@
 	height: 1px;
 }
 
+div.tweet_result {
+	margin-top:0;
+	margin-bottom:0 !important;
+	padding-top:0;
+	padding-bottom:0;
+}
+
+div.tweet_user_info {
+	float: left;
+	margin-top:0;
+	margin-bottom:0 !important;
+	padding-top:0;
+	padding-bottom:0;
+}
+
+div.tweet_date_info {
+	float: right;
+	margin-top:0;
+	margin-bottom:0 !important;
+	padding-top:0;
+	padding-bottom:0;
+}
+
+div.tweet_body {
+	clear:both;
+	margin-top:0;
+	margin-bottom:0 !important;
+	padding-top:0;
+	padding-bottom:0;
+}
+
 .tweet_user {
+	color: #999999;
+}
+
+.tweet_user_link {
 	margin-right:5px;
+}
+
+.tweet_finished {
+	color: #999999;
 }
 
 #twitter_results scrollbar {

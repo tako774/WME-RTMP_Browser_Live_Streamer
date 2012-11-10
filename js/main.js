@@ -1,5 +1,7 @@
+var tw;
+
 $("document").ready(function() {
-	var load_tweet_intarval = 15 * 1000; // tweet のポーリング間隔(msec)
+	var load_tweet_intarval_time = 15 * 1000; // tweet のポーリング間隔(msec)
 	var load_description_interval = 15 * 1000; // 配信説明テキストのポーリング間隔(msec)
 	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
 	var side_width = 360; // 2カラムCSSの全体コンテナサイズのうち、main以外の部分
@@ -83,29 +85,41 @@ $("document").ready(function() {
 		$("#hashtag_url").attr({href: hashtag_url});
 		$("#tweet_result_desc").text("#" + hashtag);
 		
-		// twitter 読み込み・ポーリング
-		load_tweets(hashtag);
-		setInterval("load_tweets('" + hashtag + "')", load_tweet_intarval);
-		
 		// twitter 残り書き込み可能文字数表示
-		$("#twitter_msg").keyup(
-			function() {
-				var msg = $("#twitter_msg").val();
-				var length = get_rest_tweet_length(msg, hashtag);
-				$("#twitter_rest_tweet_length").text(length);
-			}
-		);
-		$("#twitter_msg").keyup();
+    var show_twitter_rest_tweet_length = function() {
+      var msg = $("#twitter_msg").val();
+      var length = get_rest_tweet_length(msg, hashtag);
+      $("#twitter_rest_tweet_length").text(length);
+    }
+    $('#twitter_msg').bind('textchange', function () {
+      show_twitter_rest_tweet_length();
+    });
+    show_twitter_rest_tweet_length();
 
 		// twitter 書き込みボタン
 		$("#twitter_post").click(
 			function() {
 				// 書き込み内容取得、存在したら twitter 画面を開く
 				var msg = $("#twitter_msg").val();
+        var in_reply_to_status_id = $("#in_reply_to_status_id").val();
+        var reply_to_user = $("#reply_to_user").val();
 				if (msg != '') {
-					// twitter 画面を開き、成功したら画面のメッセージをクリア
-					if (post_tweet(msg, hashtag)) {
+          // reply_to_user が本文になければ in_reply_to_status_id をクリア
+          if (reply_to_user == "" || msg.indexOf(reply_to_user) < 0) {
+            in_reply_to_status_id = "";
+          }
+          // API でツイート
+          if (tw.isAuthorized()) {
+            var status = msg.replace(/\n/g, " ") + " " + document.location.href + " #" + hashtag;
+            tw.status_update(status, in_reply_to_status_id)
 						$("#twitter_msg").val("");
+						$("#twitter_msg").keyup();
+          }
+					// twitter 画面を開き、成功したら画面のメッセージをクリア
+					else if (post_tweet(msg, hashtag)) {
+						$("#twitter_msg").val("");
+            $("#in_reply_to_status_id").val("");
+            $("#reply_to_user").val("");
 						$("#twitter_msg").keyup();
 					}
 				}
@@ -140,4 +154,132 @@ $("document").ready(function() {
 		});
 	}
 	
+  // Twitter API 初期設定
+  var consumer = {
+    consumerKey: 'ZwmebkPGPQWow6aetJPw',
+    consumerSecret: 'HjzMYSfM57Fxu0UMyh8IqGyNvQtJ3WdWUnvYtJFHQs'
+  };
+  tw = new TwitterAPI(consumer);
+  var load_tweets_hashtag = function() { load_tweets(tw, hashtag) };
+  tw.oauthToken = load('oauthToken');
+  tw.oauthTokenSecret = load('oauthTokenSecret');
+  tw.userId = load('userId');
+  
+  var load_tweet_interval;
+
+  // Request Token 取得画面を開くボタンに、関数紐付け
+  $("#open_request_token_window").click(
+    function() {
+      window.open(tw.getRequestTokenUrl());
+      $("#request_token_response").removeAttr("disabled");
+      $("#request_token_response").focus();
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#request_token_response_text").css("font-weight", "bold");
+    }
+  );
+  // Request Token 画面レスポンス入力欄が入力されたら、認証画面を開くボタンを有効化
+  $('#request_token_response').bind('textchange', function (event, previousText) {
+    if ($("#request_token_response").val() != "") {
+      $("#open_authorize_window").removeAttr("disabled");
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#open_authorize_window_text").css("font-weight", "bold");
+    } else {
+      $("#open_authorize_window").attr("disabled", "disabled");
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#request_token_response_text").css("font-weight", "bold");
+    }
+  });
+  // 認証画面を開くボタンに関数紐付け
+  $("#open_authorize_window").click(
+    function() {
+      tw.parseRequestTokenResponse($("#request_token_response").val());
+      window.open(tw.getAuthorizeUrl());
+      $("#pin").removeAttr("disabled");
+      $("#pin").focus();
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#pin_text").css("font-weight", "bold");
+    }
+  );
+  // PIN 入力欄が正しく入力されたら、Access Token 取得画面を開くボタンを有効化
+  $('#pin').bind('textchange', function (event, previousText) {
+    var pin = $("#pin").val();
+    if (/[0-9]{7}/.test(pin)) {
+      $("#open_access_token_window").removeAttr("disabled");
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#open_access_token_window_text").css("font-weight", "bold");
+    } else {
+      $("#open_access_token_window").attr("disabled", "disabled");
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#pin_text").css("font-weight", "bold");
+    }
+  });
+  
+  // Access Token 取得画面を開くボタンに、関数紐付け
+  $("#open_access_token_window").click(
+    function() {
+      var pin = $("pin").val();
+      window.open(tw.getAccessTokenUrl(pin));
+      $("#access_token_response").removeAttr("disabled");
+      $("#access_token_response").focus();
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#access_token_response_text").css("font-weight", "bold");
+    }
+  );
+  // Access Token Response が入力されたら、Twitter 連携完了！ボタンを有効化
+  $('#access_token_response').bind('textchange', function (event, previousText) {
+    if ($("#access_token_response").val() != "") {
+      $("#set_access_token_response").removeAttr("disabled");
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#set_access_token_response_text").css("font-weight", "bold");
+    } else {
+      $("#set_access_token_response").attr("disabled", "disabled");
+      $("#twitter_authorize > li").css("font-weight", "normal");
+      $("#access_token_response_text").css("font-weight", "bold");
+    }
+  });
+  // Twitter 連携完了！ボタンに関数紐付け
+  $("#set_access_token_response").click(
+    function() {
+      var access_token_response = $("#access_token_response").val();
+      tw.parseAccessTokenResponse(access_token_response);
+      if (tw.isAuthorized()) {
+        save('oauthToken', tw.oauthToken);
+        save('oauthTokenSecret', tw.oauthTokenSecret);
+        save('userId', tw.userId);
+        $("#twitter_authorize").hide();
+        // 検索結果のリロード開始
+        $("#twitter_results").show();
+        load_tweets_hashtag();
+        load_tweet_interval = setInterval(load_tweets_hashtag, load_tweet_intarval);
+      }
+    }
+  );
+  
+  function showTwitterAuthorize() {
+    $("#twitter_results").empty();
+    $("#twitter_results").hide();
+    $("#twitter_authorize").show();
+    $("#twitter_authorize > li").css("font-weight", "normal");
+    $("#open_request_token_window_text").css("font-weight", "bold");
+  }
+  
+  if (tw.isAuthorized()) {
+    // Twitter 認証済みであれば、ツイート検索結果を表示
+    $("#twitter_results").show();
+    load_tweets_hashtag();
+    load_tweet_interval = setInterval(load_tweets_hashtag, load_tweet_intarval_time);
+  } else {
+    // Twitter 認証済みでなければ、認証取得欄を表示
+    showTwitterAuthorize();
+  }
+  
+  // Twitter 再認証ボタンに関数ヒモ付
+  $("#twitter_reauthorize").click(
+    function() {
+      // 検索結果のリロード停止
+      clearInterval(load_tweet_interval);
+      showTwitterAuthorize();
+    }
+  );
+    
 });
