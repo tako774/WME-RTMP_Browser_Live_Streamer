@@ -250,8 +250,8 @@ function getTwitterDateStr(date, baseDate) {
   } else if (baseDate - date < 60 * 60 * 24 * 1000) {
     return Math.floor((baseDate - date) / (60 * 60 * 1000)) + "時間";
   } else if (
-      date1.getFullYear() == date2.getFullYear() &&
-      date1.getMonth() == date2.getMonth()
+      date.getFullYear() == baseDate.getFullYear() &&
+      date.getMonth() == baseDate.getMonth()
     ) {
     return date.getMonth() + "月" + date.getDate() + "日";
   } else {
