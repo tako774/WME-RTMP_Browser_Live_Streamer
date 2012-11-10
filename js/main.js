@@ -155,11 +155,7 @@ $("document").ready(function() {
 	}
 	
   // Twitter API 初期設定
-  var consumer = {
-    consumerKey: 'ZwmebkPGPQWow6aetJPw',
-    consumerSecret: 'HjzMYSfM57Fxu0UMyh8IqGyNvQtJ3WdWUnvYtJFHQs'
-  };
-  tw = new TwitterAPI(consumer);
+  tw = new TwitterAPI(twitter_consumer);
   var load_tweets_hashtag = function() { load_tweets(tw, hashtag) };
   tw.oauthToken = load('oauthToken');
   tw.oauthTokenSecret = load('oauthTokenSecret');
