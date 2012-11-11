@@ -1,8 +1,8 @@
 NAME: WME Browser Live Streamer (WMEブラウザ配信ツール)
 Author: nanashi (@tako774)
 Lisence: NYSL (同梱のNYSL.txtを参照)
-Version: 0.10
-Date: 2012/10/10
+Version: 0.11
+Date: 2012/11/11
 
 ○概要
 - javascript しか使っていない、ブラウザで使えるライブストリーミング配信ツールです
