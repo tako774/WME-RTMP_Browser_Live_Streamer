@@ -77,7 +77,7 @@ function html_escape(str) {
 // データ保存
 function save(key, value) {
   var option = {
-    expires: 365,
+    expires: 7305,
     path: location.pathname.replace(/[^\/]*$/, '')
   }
   $.cookie(key, value, option)
