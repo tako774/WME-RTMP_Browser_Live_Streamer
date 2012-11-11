@@ -121,7 +121,7 @@ function load_tweets_callback(result) {
     // ツイート部分
     result += "<div class='tweet_body'>";
     result += 	text;
-    result += 	" - ";
+    result += 	" ";
     result += 	" <a id='" + reply_id + "' title='@" + this.user.screen_name + "'>返信</a>";
     result += 	" <a id='" + retweet_id + "' title='retweet'>RT</a>";
     result += 	" <span id='" + retweeted_id + "' class='tweet_finished' title='retweeted' style='display:none'>RT済</span>";
