@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 #twitter_stream {
 	border:1px solid #999999;
 	height:626px;
@@ -67,6 +69,7 @@ div.tweet_result {
 
 div.tweet_user_info {
 	float: left;
+	width: 256px;
 	margin-top:0;
 	margin-bottom:0 !important;
 	padding-top:0;
@@ -75,6 +78,8 @@ div.tweet_user_info {
 
 div.tweet_date_info {
 	float: right;
+	text-align: right;
+	width:  56px;
 	margin-top:0;
 	margin-bottom:0 !important;
 	padding-top:0;
