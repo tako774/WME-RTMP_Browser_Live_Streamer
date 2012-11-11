@@ -247,7 +247,7 @@ $("document").ready(function() {
         $("#twitter_results").show();
         $("#twitter_reauthorize").show();
         load_tweets_hashtag();
-        load_tweet_interval = setInterval(load_tweets_hashtag, load_tweet_intarval);
+        load_tweet_interval = setInterval(load_tweets_hashtag, load_tweet_intarval_time);
       }
     }
   );
