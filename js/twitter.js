@@ -253,8 +253,8 @@ function getTwitterDateStr(date, baseDate) {
       date.getFullYear() == baseDate.getFullYear() &&
       date.getMonth() == baseDate.getMonth()
     ) {
-    return date.getMonth() + "月" + date.getDate() + "日";
+    return (date.getMonth() + 1) + "月" + date.getDate() + "日";
   } else {
-    return date.getYear() + "年" + date.getMonth() + "月" + date.getDate() + "日";
+    return date.getYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
   }
 }
