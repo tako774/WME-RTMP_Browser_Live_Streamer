@@ -69,7 +69,7 @@ div.tweet_result {
 
 div.tweet_user_info {
 	float: left;
-	width: 256px;
+	width: 248px;
 	margin-top:0;
 	margin-bottom:0 !important;
 	padding-top:0;
@@ -79,7 +79,7 @@ div.tweet_user_info {
 div.tweet_date_info {
 	float: right;
 	text-align: right;
-	width:  56px;
+	width:  64px;
 	margin-top:0;
 	margin-bottom:0 !important;
 	padding-top:0;
