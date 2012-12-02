@@ -249,12 +249,9 @@ function getTwitterDateStr(date, baseDate) {
     return Math.floor((baseDate - date) / (60 * 1000)) + "分";
   } else if (baseDate - date < 60 * 60 * 24 * 1000) {
     return Math.floor((baseDate - date) / (60 * 60 * 1000)) + "時間";
-  } else if (
-      date.getFullYear() == baseDate.getFullYear() &&
-      date.getMonth() == baseDate.getMonth()
-    ) {
+  } else if (date.getFullYear() == baseDate.getFullYear()) {
     return (date.getMonth() + 1) + "月" + date.getDate() + "日";
   } else {
-    return date.getYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+    return (date.getYear() + 1900) + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
   }
 }
