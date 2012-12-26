@@ -6,6 +6,7 @@ $("document").ready(function() {
 	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
 	var side_width = 360; // 2カラムCSSの全体コンテナサイズのうち、main以外の部分
 	var current_version = version; // 使用中のバージョン
+	var TOOL_NAME = "WMEブラウザ配信ツール"; // ツール名
 	
 	// 最新バージョン記述ファイルURL
 	var latest_version_url = "http://tako774.net/tools/WME_Browser_Live_Streamer_latest_version.js";
@@ -27,7 +28,7 @@ $("document").ready(function() {
 	// 設定にもとづいた画面描画を実施
 	function display_all() {
 		// 放送タイトル表示
-		$("title").text(broadcast_title);
+		$("title").text(broadcast_title + " - " + TOOL_NAME);
 		$("#broadcast_title").text(broadcast_title);
 
 		// 放送説明表示・ポーリング
