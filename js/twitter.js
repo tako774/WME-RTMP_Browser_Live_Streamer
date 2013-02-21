@@ -217,13 +217,17 @@ function load_tweets_callback(result) {
 
 // 残り書き込み可能な文字数を返す
 function get_rest_tweet_length(msg, hashtag) {
-	var twitter_short_url_length = 20;
-	var max_tweet_length = 140 - (hashtag.length + twitter_short_url_length + 3);
-	var url_regexp = /(https?:\/\/[\w\-:;?&=+.%#\/]+)/gi;
+	var twitter_http_url_length = 22;
+	var twitter_https_url_length = 23;
+	var max_tweet_length = 140 - (hashtag.length + twitter_http_url_length + 3);
+	var url_http_regexp = /(http:\/\/[\w\-:;?&=+.%#\/]+)/gi;
+	var url_https_regexp = /(https:\/\/[\w\-:;?&=+.%#\/]+)/gi;
 	
-	var url_strs = msg.match(url_regexp) || new Array();
-	var msg_url_deleted = msg.replace(url_regexp, '');
-	return max_tweet_length - (msg_url_deleted.length + twitter_short_url_length * url_strs.length);
+	var url_http_strs = msg.match(url_http_regexp) || new Array();
+	var msg_url_deleted = msg.replace(url_http_regexp, '');
+	var url_https_strs = msg_url_deleted.match(url_https_regexp) || new Array();
+	var msg_url_deleted = msg_url_deleted.replace(url_https_regexp, '');
+	return max_tweet_length - (msg_url_deleted.length + twitter_http_url_length * url_http_strs.length + twitter_https_url_length * url_https_strs.length );
 }
 
 // URLらしき文字列にaタグでハイパーリンクをつける
