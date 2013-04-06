@@ -214,7 +214,7 @@ $("document").ready(function() {
   // Access Token 取得画面を開くボタンに、関数紐付け
   $("#open_access_token_window").click(
     function() {
-      var pin = $("pin").val();
+      var pin = $("#pin").val();
       window.open(tw.getAccessTokenUrl(pin));
       $("#access_token_response").removeAttr("disabled");
       $("#access_token_response").focus();
