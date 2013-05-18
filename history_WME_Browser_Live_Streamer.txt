@@ -1,5 +1,8 @@
 更新履歴：WME Browser Live Streamer (WMEブラウザ配信ツール)
 
+○Ver.0.14
+- Firefox 21 以降で、Windows Media Player プラグインを有効化する手順の説明を追加
+
 ○Ver.0.13
 - 2013/4/5 以降、twitter 認証が正常にできなくなっていたのを修正
   ACCESS TOKEN 画面を開く際の js で、PIN を取得しそこなっていた不具合を修正しました。
