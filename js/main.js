@@ -45,7 +45,19 @@ $("document").ready(function() {
 		
 		// IE以外にプラグイン誘導表示
 		if (!$.browser.msie) {
-			$("#plugin_invitation").html("Windows Media Player プラグイン(IE以外用)のダウンロード<br />インストールして、ブラウザを再起動すれば見られるはずです");
+      var plugin_msg = "";
+      plugin_msg += "<a href=\"http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download\" target=\"_blank\">";
+      plugin_msg += "Windows Media Player プラグイン(IE以外用)のダウンロード<br />";
+      plugin_msg += "インストールして、ブラウザを再起動すれば見られるはずです</a><br />";
+      plugin_msg += "<br />";
+      plugin_msg += "Firefox 21 以降の場合、更に以下の手順が必要です<br />";
+      plugin_msg += "１．ロケーションバーに about:config と入力する<br />";
+      plugin_msg += "２．plugins.load_appdir_plugins を検索し、true に値を変える<br />";
+      plugin_msg += "３．ブラウザを再起動する<br />";
+      plugin_msg += "（参考）<a href =\"http://support.mozilla.org/ja/kb/windows-media-or-other-plugins-stopped-working\">";
+      plugin_msg += "Mozzila Support サイト"
+      plugin_msg += "</a>";
+			$("#plugin_invitation").html(plugin_msg);
 		}
 		
 		// player の HTML 文字列生成

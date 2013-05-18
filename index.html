@@ -32,8 +32,7 @@
 <h1 id="broadcast_title"></h1> 
 
 <div id="player_wrapper" style="clear:both;z-index:10;position:relative">
-	<p style="position:absolute;z-index:0">
-		<a id="plugin_invitation" style="font-weight:bold" href="http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download" target="_blank"></a>
+	<p id="plugin_invitation" style="position:absolute;z-index:0;font-weight:bold">
 	</p>
 	<span id="player"></span>
 </div>
@@ -92,7 +91,12 @@ Author: nanashi twitter:<a href="http://www.twitter.com/tako774/" target="_blank
 <div id="footer">
 <p>
 <span style="font-weight:bold">IE以外のブラウザ（Firefox/Chrome/Opera/Safari）で再生できない場合は、<br />
-<a style="font-weight:bold" href="http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download" target="_blank">こちらのプラグイン</a>をインストールし、ブラウザを再起動すれば見られるはずです。</span><br />エラーが出た場合、一度アンインストールして再インストールで見られるケースもあるようです。
+<a style="font-weight:bold" href="http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download" target="_blank">こちらのプラグイン</a>をインストールし、ブラウザを再起動すれば見られるはずです。</span><br />
+Firefox 21 以降の場合、更に以下の手順が必要です。<br />
+１．ロケーションバーに about:config と入力する。<br />
+２．plugins.load_appdir_plugins を検索し、true に値を変える。<br />
+３．ブラウザを再起動する。<br />
+エラーが出た場合、一度アンインストールして再インストールで見られるケースもあるようです。<br />
 </p>
 <p>
 再生ボタンを押しても始まらない場合は、放送休止中です。
