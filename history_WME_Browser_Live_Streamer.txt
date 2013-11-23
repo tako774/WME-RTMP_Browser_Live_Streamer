@@ -1,5 +1,8 @@
 更新履歴：WME Browser Live Streamer (WMEブラウザ配信ツール)
 
+○Ver.0.15
+- IE11 で不要なプラグイン導入の説明が見えてしまうのを修正
+
 ○Ver.0.14
 - Firefox 21 以降で、Windows Media Player プラグインを有効化する手順の説明を追加
 
