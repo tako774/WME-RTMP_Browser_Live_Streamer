@@ -1,13 +1,18 @@
 var tw;
 
 $("document").ready(function() {
+	if ((typeof format == 'undefined') || format == '') { format = 'wmv' } // デフォルト配信形式を wmv に設定
+
 	var load_tweet_intarval_time = 15 * 1000; // tweet のポーリング間隔(msec)
 	var load_description_interval = 15 * 1000; // 配信説明テキストのポーリング間隔(msec)
-	var player_crtl_height = 65; // WMP のコントロール部分の高さ(px)
+	var player_crtl_height = (format == 'wmv') ? 65 : 0; // WMP のコントロール部分の高さ(px)
 	var side_width = 360; // 2カラムCSSの全体コンテナサイズのうち、main以外の部分
 	var current_version = version; // 使用中のバージョン
-	var TOOL_NAME = "WMEブラウザ配信ツール"; // ツール名
-	
+	var TOOL_NAME = "WME/RTMPブラウザ配信ツール"; // ツール名
+	var FLOW_PLAYER_JS_URL = "./js/flowplayer-3.2.13.min.js"
+	var FLOW_PLAYER_SWF_URL = "./swf/flowplayer-3.2.18.swf";
+	var FLOW_PLAYER_RTMP_URL = './swf/flowplayer.rtmp-3.2.13.swf'
+
 	// 最新バージョン記述ファイルURL
 	var latest_version_url = "http://tako774.net/tools/WME_Browser_Live_Streamer_latest_version.js";
 	
@@ -35,64 +40,101 @@ $("document").ready(function() {
 		load_description();
 		setInterval("load_description()", load_description_interval);
 		
-		// Streaming URL 表示
-		$("#broadcast_url").text(broadcast_url);
-		
 		// 配信エリアサイズ設定
 		$("#player_wrapper").width(broadcast_width);
 		$("#player_wrapper").height(broadcast_height + player_crtl_height);
 		$("#container").width(broadcast_width + side_width)
 		
-		// IE以外にプラグイン誘導表示
-		if (!$.browser.msie) {
-      var plugin_msg = "";
-      plugin_msg += "<a href=\"http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download\" target=\"_blank\">";
-      plugin_msg += "Windows Media Player プラグイン(IE以外用)のダウンロード<br />";
-      plugin_msg += "インストールして、ブラウザを再起動すれば見られるはずです</a><br />";
-      plugin_msg += "<br />";
-      plugin_msg += "Firefox 21 以降の場合、更に以下の手順が必要です<br />";
-      plugin_msg += "１．ロケーションバーに about:config と入力する<br />";
-      plugin_msg += "２．plugins.load_appdir_plugins を検索し、true に値を変える<br />";
-      plugin_msg += "３．ブラウザを再起動する<br />";
-      plugin_msg += "（参考）<a href =\"http://support.mozilla.org/ja/kb/windows-media-or-other-plugins-stopped-working\">";
-      plugin_msg += "Mozzila Support サイト"
-      plugin_msg += "</a>";
-			$("#plugin_invitation").html(plugin_msg);
-		}
-		
-		// player の HTML 文字列生成
-		// height は ShowControl で 65px あることを考慮する
-		var object_html = "<object";
-		object_html +=  " id='player_object'";
-		object_html +=  " type='application/x-oleobject'";
-		object_html +=  " width='" + broadcast_width + "'";
-		object_html +=  " height='" + (broadcast_height + player_crtl_height) + "'";
-		object_html +=  " classid='CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6'";
-		object_html +=  " standby='Loading Windows Media Player components...'";
-		object_html += ">";
+    // player 表示
+    if (format == 'wmv') {
+      // IE以外にプラグイン誘導表示
+      if (!$.browser.msie) {
+        var plugin_msg = "";
+        plugin_msg += "<a href=\"http://www.interoperabilitybridges.com/windows-media-player-firefox-plugin-download\" target=\"_blank\">";
+        plugin_msg += "Windows Media Player プラグイン(IE以外用)のダウンロード<br />";
+        plugin_msg += "インストールして、ブラウザを再起動すれば見られるはずです</a><br />";
+        plugin_msg += "<br />";
+        plugin_msg += "Firefox 21 以降の場合、更に以下の手順が必要です<br />";
+        plugin_msg += "１．ロケーションバーに about:config と入力する<br />";
+        plugin_msg += "２．plugins.load_appdir_plugins を検索し、true に値を変える<br />";
+        plugin_msg += "３．ブラウザを再起動する<br />";
+        plugin_msg += "（参考）<a href =\"http://support.mozilla.org/ja/kb/windows-media-or-other-plugins-stopped-working\">";
+        plugin_msg += "Mozzila Support サイト"
+        plugin_msg += "</a>";
+        $("#plugin_invitation").html(plugin_msg);
+        
+        $("#plugin_invitation_footer").show();
+      }
+      
+      // player の HTML 文字列生成
+      // height は ShowControl で 65px あることを考慮する
+      var player_html = "<object";
+      player_html +=  " id='player_object'";
+      player_html +=  " type='application/x-oleobject'";
+      player_html +=  " width='" + broadcast_width + "'";
+      player_html +=  " height='" + (broadcast_height + player_crtl_height) + "'";
+      player_html +=  " classid='CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6'";
+      player_html +=  " standby='Loading Windows Media Player components...'";
+      player_html += ">";
 
-		object_html +=  "<param name='URL' value='" + broadcast_url +"' />";
-		object_html +=  "<param name='autostart' value='true' />";
-		object_html +=  "<param name='ShowControls' value='true' />";
-		object_html +=  "<param name='ShowStatusBar' value='false' />";
-		object_html +=  "<param name='ShowDisplay' value='false' />";
+      player_html +=  "<param name='URL' value='" + broadcast_url +"' />";
+      player_html +=  "<param name='autostart' value='true' />";
+      player_html +=  "<param name='ShowControls' value='true' />";
+      player_html +=  "<param name='ShowStatusBar' value='false' />";
+      player_html +=  "<param name='ShowDisplay' value='false' />";
 
-		object_html +=  "<embed";
-		object_html +=  " id='player_embed'";
-		object_html +=  " type='application/x-mplayer2'";
-		object_html +=  " name='MediaPlayer'";
-		object_html +=  " src='" + broadcast_url +"'";
-		object_html +=  " width='" + broadcast_width + "'" ;
-		object_html +=  " height='" + (broadcast_height + player_crtl_height) + "'" ;
-		object_html +=  " showControls='1'";
-		object_html +=  " showStatusBar='0'";
-		object_html +=  " showDisplay='0'";
-		object_html +=  " autostart='1' />";
-		object_html += "</object>";
+      player_html +=  "<embed";
+      player_html +=  " id='player_embed'";
+      player_html +=  " type='application/x-mplayer2'";
+      player_html +=  " name='MediaPlayer'";
+      player_html +=  " src='" + broadcast_url +"'";
+      player_html +=  " width='" + broadcast_width + "'" ;
+      player_html +=  " height='" + (broadcast_height + player_crtl_height) + "'" ;
+      player_html +=  " showControls='1'";
+      player_html +=  " showStatusBar='0'";
+      player_html +=  " showDisplay='0'";
+      player_html +=  " autostart='1' />";
+      player_html += "</object>";
+      
+      $("#player").replaceWith(player_html);
+      
+      // Streaming URL 表示
+      $("#broadcast_url").text(broadcast_url);
+    
+    } else if (format == 'rtmp') {
+      
+      // player の HTML 文字列生成
+      var player_html = "<a";
+      player_html +=   " id='rtmp_player'";
+      player_html +=   " style='display:block;width:" + broadcast_width + "px;height:" + (broadcast_height + player_crtl_height) + "px'";
+      player_html += ">";
+      player_html += "</a>";
 
-		// player を表示
-		$("#player").replaceWith(object_html);
-		
+      // player を表示
+      $("#player").replaceWith(player_html);
+      $.getScript(FLOW_PLAYER_JS_URL, function() {
+        $f("rtmp_player", FLOW_PLAYER_SWF_URL,{
+          clip:{
+            live: 'true',
+            url: rtmp_channel,
+            provider: 'rtmp'
+          },
+          plugins: {
+            rtmp: {
+              url: FLOW_PLAYER_RTMP_URL,
+              netConnectionUrl: rtmp_url
+            }
+          }
+        });
+      });
+      
+      // Streaming URL 表示
+      $("#broadcast_url").text(rtmp_url + "/" + rtmp_channel);
+      
+    } else {
+      debug('エラー：config の format の設定値が正しくありません。');
+    }
+
 		// tweet 表示部のハッシュタグを書く
 		var hashtag_url = "https://twitter.com/#!/search/%23" + hashtag;
 		$("#hashtag_url").attr({href: hashtag_url});

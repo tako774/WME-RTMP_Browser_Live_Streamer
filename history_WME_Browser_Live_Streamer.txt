@@ -1,4 +1,11 @@
-更新履歴：WME Browser Live Streamer (WMEブラウザ配信ツール)
+更新履歴：WME/RTMP Browser Live Streamer (WME/RTMPブラウザ配信ツール)
+
+○Ver.0.19
+- RTMP/RTMPT形式での配信に対応
+  Open Broadcaster Software/Flash Media Encoder/XSplit などで配信できます。
+  ブラウザ側は flash（flowplayer）を採用しています。
+- 名称を変更：「WME Browser Live Streamer (WMEブラウザ配信ツール)」から
+  「WME/RTMP Browser Live Streamer (WME/RTMPブラウザ配信ツール)」へ
 
 ○Ver.0.15
 - IE11 で不要なプラグイン導入の説明が見えてしまうのを修正
