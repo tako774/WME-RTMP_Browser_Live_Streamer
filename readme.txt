@@ -1,4 +1,4 @@
-NAME: WME Browser Live Streamer (WMEブラウザ配信ツール)
+NAME: WME/RTMP Browser Live Streamer (WME/RTMPブラウザ配信ツール)
 Author: nanashi (@tako774)
 Lisence: NYSL (同梱のNYSL.txtを参照)、ただし flowplayer は LISENCE_flowplayer.txt を参照
 Version: 0.19
@@ -8,9 +8,10 @@ Date: 2014/4/30
 - javascript しか使っていない、ブラウザで使えるライブストリーミング配信ツールです
 
 - WME/MEE/KTE など、Windows Media Player で視聴できるエンコーダーであれば、なんでも使えます
-- RTMP/RTMPT 形式の配信にも対応しました (0.20より)。
+- RTMP/RTMPT 形式の配信にも対応しました (v0.19より)。
+  Open Broadcaster Software(v0.625b 64bit) + nginx trmp (1.5.5/1.0.4) http://rtmp.jack0r.com/ と、
   Open Broadcaster Software(v0.622b 64bit) + Red5(v1.02) で動作確認済みです。
-  RTMP/RTMPT 形式のメリット／デメリットと配信方法は、下記を参照ください。
+  RTMP/RTMPT 形式のメリット／デメリットと配信方法は、下記を参照ください（未記載：TODO）。
 
 - twitter と連携できます（Twitter API 1.1 対応済み）
 - 配信内容説明テキスト(config/description.txt の内容)は、視聴者のリロード無しで更新されます
