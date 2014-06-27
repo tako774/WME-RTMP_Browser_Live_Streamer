@@ -3,12 +3,12 @@
 // 配信サイズ,タイトル,twitterタグ
 var broadcast_width  = 800 // movie width
 var broadcast_height = 500 // movie height
-var broadcast_title = "nanashi 放送局"; // 放送タイトル 例："〇〇放送局"
-var hashtag = "nanashi_bc"; // 配信用の twitter ハッシュタグ 他の人とかぶらなければ何でもいいと思います
+var broadcast_title = ""; // 放送タイトル 例："〇〇放送局"
+var hashtag = ""; // 配信用の twitter ハッシュタグ 他の人とかぶらなければ何でもいいと思います
 
 // 配信形式
 // 'wmv' :WME/KTE/MEEで配信する場合
-// 'rtmp':RTMP(OBS/XSplit/FME + Red5等)で配信する場合
+// 'rtmp':RTMP(OBS/XSplit/FME + Nginx rtmp/Red5等)で配信する場合
 var format = 'wmv' 
 
 // 配信URL
