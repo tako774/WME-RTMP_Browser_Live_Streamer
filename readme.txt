@@ -68,3 +68,5 @@ A1.Search Streaming を読ませる設定が、最新の棒読みちゃんでできます
   設定方法はKIAI
 
 ○ライセンス
+　同梱の NYSL.txt を参照。
+　flowplayer の js/swf ファイルについては、同梱の LICENSE_flowplayer.txt を参照。
