@@ -1,8 +1,8 @@
 NAME: WME/RTMP Browser Live Streamer (WME/RTMPブラウザ配信ツール)
 Author: nanashi (@tako774)
 Lisence: NYSL (同梱のNYSL.txtを参照)、ただし flowplayer は LISENCE_flowplayer.txt を参照
-Version: 0.19
-Date: 2014/4/30
+Version: 0.20
+Date: 2018/7/27
 
 ○概要
 - javascript しか使っていない、ブラウザで使えるライブストリーミング配信ツールです
@@ -17,8 +17,9 @@ Date: 2014/4/30
 - 配信内容説明テキスト(config/description.txt の内容)は、視聴者のリロード無しで更新されます
 
 ○判明済みの不具合
-- Opera でツイート・RT・fav をすると、twitter から json ファイルがダウンロードされてしまう
+- Opera/Firefox でツイート・RT をすると、twitter から json ファイルがダウンロードされてしまう
 　→ ファイルを開くか聞かれたりしますが、開かなければ問題はないです。
+- fav が動作しない（いつからかは不明）
 
 ○使い方（WME等での配信時）
 
@@ -50,7 +51,7 @@ Date: 2014/4/30
 - 鏡モードとは
 　他のWME/RTMPブラウザ配信ツールの配信を鏡する際に、検索ハッシュタグなどを相手の設定にする機能
 　自分の配信URLの後ろに"?<配信元のWMEブラウザ配信ツールのURL>"をつけるだけで使えます
-　	http://<自分の配信ツールのURL>?http://tako774.net/bc/
+　	https://<自分の配信ツールのURL>?https://tako774.net/bc/
 　にブラウザでアクセスしてみると、どういうことかわかると思います。
 
 1.普通に配信鏡をする時のように、鏡ツールで配信元に接続します
