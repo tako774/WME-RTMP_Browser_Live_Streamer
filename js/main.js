@@ -14,7 +14,7 @@ $("document").ready(function() {
 	var FLOW_PLAYER_RTMP_URL = './swf/flowplayer.rtmp-3.2.13.swf'
 
 	// 最新バージョン記述ファイルURL
-	var latest_version_url = "http://tako774.net/tools/WME_Browser_Live_Streamer_latest_version.js";
+	var latest_version_url = "https://tako774.net/tools/WME_Browser_Live_Streamer_latest_version.js";
 	
 	// 使用中バージョン表示
 	$("#current_version").text(current_version);
@@ -58,7 +58,7 @@ $("document").ready(function() {
         plugin_msg += "１．ロケーションバーに about:config と入力する<br />";
         plugin_msg += "２．plugins.load_appdir_plugins を検索し、true に値を変える<br />";
         plugin_msg += "３．ブラウザを再起動する<br />";
-        plugin_msg += "（参考）<a href =\"http://support.mozilla.org/ja/kb/windows-media-or-other-plugins-stopped-working\">";
+        plugin_msg += "（参考）<a href =\"https://support.mozilla.org/ja/kb/windows-media-or-other-plugins-stopped-working\">";
         plugin_msg += "Mozzila Support サイト"
         plugin_msg += "</a>";
         $("#plugin_invitation").html(plugin_msg);

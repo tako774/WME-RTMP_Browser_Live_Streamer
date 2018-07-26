@@ -57,7 +57,7 @@ function load_tweets_callback(result) {
     var retweeted_id = "retweeted_" + this.id_str;
     var fav_create_id = "fav_create_" + this.id_str;
     var fav_destroy_id = "fav_destroy_" + this.id_str;
-    var status_url = "http://twitter.com/" + this.user.screen_name + "/status/" + this.id_str;
+    var status_url = "https://twitter.com/" + this.user.screen_name + "/status/" + this.id_str;
     var urls = new Array();
     var text = this.text;
     var result = "";
@@ -101,13 +101,13 @@ function load_tweets_callback(result) {
     
     // アイコン・名前部分
     result += "<div class='tweet_user_info'>";
-    result += 	"<a href='http://twitter.com/" + this.user.screen_name + "' class='tweet_user_link'>";
+    result += 	"<a href='https://twitter.com/" + this.user.screen_name + "' class='tweet_user_link'>";
     result += 		"<img width='24' height='24' alt='" + this.user.screen_name + " on Twitter' src='" + this.user.profile_image_url + "' />";
     result += 	"</a>";
     result +=   "<span class='tweet_user'>";
     result +=     this.user.name;
     result +=     " ";
-    result +=     "<a href='http://twitter.com/" + this.user.screen_name + "' class='tweet_user_link' target='_blank'>";
+    result +=     "<a href='https://twitter.com/" + this.user.screen_name + "' class='tweet_user_link' target='_blank'>";
     result +=     "@" + this.user.screen_name;
     result +=     "</a>";
     result +=   "</span>";
@@ -235,8 +235,8 @@ function linkify(text) {
     // modified from TwitterGitter by David Walsh (davidwalsh.name)
     // courtesy of Jeremy Parrish (rrish.org)
     return text.replace(/(https?:\/\/[\w\-:;?&=+.%#\/]+)/gi, '<a href="$1" target="_blank">$1</a>')
-               .replace(/(^|\W)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>')
-               .replace(/(^|\W)#(\w+)/g, '$1#<a href="http://search.twitter.com/search?q=%23$2" target="_blank">$2</a>');
+               .replace(/(^|\W)@(\w+)/g, '$1<a href="https://twitter.com/$2" target="_blank">@$2</a>')
+               .replace(/(^|\W)#(\w+)/g, '$1#<a href="https://search.twitter.com/search?q=%23$2" target="_blank">$2</a>');
 }
 
 // Twitter 表示用の時間を返す
