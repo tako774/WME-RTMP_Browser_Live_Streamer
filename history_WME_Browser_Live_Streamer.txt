@@ -1,5 +1,10 @@
 更新履歴：WME/RTMP Browser Live Streamer (WME/RTMPブラウザ配信ツール)
 
+○Ver.0.20
+- tako774.net へのリンクを HTTPS に修正
+- twitter へのリンクを HTTPS に修正
+- twitter ハッシュタグページへのリンクURL（ページ右上部）を修正
+
 ○Ver.0.19
 - RTMP/RTMPT形式での配信に対応
   Open Broadcaster Software/Flash Media Encoder/XSplit などで配信できます。
