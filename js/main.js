@@ -136,7 +136,7 @@ $("document").ready(function() {
     }
 
 		// tweet 表示部のハッシュタグを書く
-		var hashtag_url = "https://twitter.com/#!/search/%23" + hashtag;
+		var hashtag_url = "https://twitter.com/hashtag/" + hashtag;
 		$("#hashtag_url").attr({href: hashtag_url});
 		$("#tweet_result_desc").text("#" + hashtag);
 		
